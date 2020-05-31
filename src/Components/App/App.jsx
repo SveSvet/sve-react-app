@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styles from './App.module.css';
 import About from '../About/About';
 import Todo from '../Todo/Todo';

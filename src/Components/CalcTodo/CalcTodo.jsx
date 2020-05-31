@@ -4,9 +4,8 @@ import styles from './CalcTodo.module.css';
 
 const CalcTodo = ({ tasks, onClickFilteredTasks, filtered }) => {
     const allTasks = tasks.length;
-    const completedTasks = tasks.filter(item => item.isDone).length;
-    const uncompletedTasks = tasks.filter(item => !item.isDone).length;
-
+    const completedTasks = tasks.filter(item => item.isDone === true).length;
+    const uncompletedTasks = tasks.filter(item => item.isDone === false).length;
 
     return (
         <div className={styles.calcTasksWrapper}>

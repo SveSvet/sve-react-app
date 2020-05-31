@@ -4,7 +4,6 @@ import ItemList from '../ItemList/ItemList';
 import Input from "../Input/Input";
 import CalcTodo from "../CalcTodo/CalcTodo";
 import styles from './Todo.module.css';
-import update from 'immutability-helper';
 import { DragDropContext } from "react-beautiful-dnd";
 
 const buttonTasksName = {
@@ -14,14 +13,13 @@ const buttonTasksName = {
 };
 
 const Todo = () => {
-
     const [tasks, setTasks] = useState(
         [{  value: "Привет! Я - твой todo-list",
             isDone: false,
             isImportant: false,
             id: 1 }]
     );
-    const [filtered, setFiltered] = useState(  {...buttonTasksName,  all: 'Все'});
+    const [filtered, setFiltered] = useState(buttonTasksName.all);
     const [count, setCount] = useState(1);
     const [classNameForInputRepeat, setClassNameForInputRepeat] = useState(false);
 
@@ -41,7 +39,7 @@ const Todo = () => {
         const newTodoItems = [...tasks];
 
         const [removed] = newTodoItems.splice(source.index, 1);
-        newTodoItems.splice(destination.index, 0, removed)
+        newTodoItems.splice(destination.index, 0, removed);
         setTasks([
             ...newTodoItems
         ])
@@ -70,9 +68,9 @@ const Todo = () => {
     };
 
     const onClickDelete = id => {
-        const newItemList = setTasks(tasks.filter(item => {
+        const newItemList = tasks.filter(item => {
             return item.id !== id
-        }));
+        });
 
         setTasks({ tasks: newItemList });
         setCount((count) => count - 1);
@@ -104,18 +102,20 @@ const Todo = () => {
 
     const onClickFilteredTasks = filtered => setFiltered({ filtered: filtered });
 
-        let filteredTasks;
-        switch (filtered) {
-            case buttonTasksName.completed:
-                filteredTasks = tasks.filter(item => item.isDone);
-                break;
-            case buttonTasksName.uncomplited:
-                filteredTasks = tasks.filter(item => !item.isDone);
-                break;
-            case buttonTasksName.all:
-                filteredTasks = tasks;
-                break;
-        };
+    let filteredTasks;
+    switch (filtered) {
+        case buttonTasksName.completed:
+            filteredTasks = tasks.filter(item => item.isDone);
+            break;
+        case buttonTasksName.uncomplited:
+            filteredTasks = tasks.filter(item => !item.isDone);
+            break;
+        case buttonTasksName.all:
+            filteredTasks = tasks;
+            break;
+    };
+
+    console.log('filteredTasks2:', filteredTasks)
 
         return (
             <Card className={styles.container}>
