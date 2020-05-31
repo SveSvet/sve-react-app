@@ -102,7 +102,7 @@ const Todo = () => {
 
     const onClickFilteredTasks = filtered => setFiltered({ filtered: filtered });
 
-    let filteredTasks;
+    let filteredTasks = [];
     switch (filtered) {
         case buttonTasksName.completed:
             filteredTasks = tasks.filter(item => item.isDone);
